@@ -24,7 +24,10 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-
+// checks whether Date is valid
+function validDate(d) {
+  return d instanceof Date && !isNaN(d)
+}
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
