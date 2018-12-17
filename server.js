@@ -29,6 +29,11 @@ function validDate(d) {
   return d instanceof Date && !isNaN(d)
 }
 
+// timestamp JSON format
+function timestampJSON(d) {
+  return { unix: d.getTime(), utc: d.toUTCString() }
+}
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
