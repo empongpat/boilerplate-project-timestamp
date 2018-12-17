@@ -24,6 +24,23 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+// API endpoint for empty date_string
+app.get('/api/timestamp', (req, res) => {
+  res.send(timestampJSON(new Date()))
+})
+
+// API endpoint for date_string
+app.get('/api/timestamp/:date_string', (req, res) => {
+  const date_string = req.params.date_string
+  // Checks whether it's a millisecond or UTC string
+  const date = new Date(!isNaN(date_string) ? parseFloat(date_string) : date_string)
+  if (validDate(date)) {
+    res.send(timestampJSON(date));
+  } else {
+    res.send({ error: 'Invalid Date' })
+  }
+})
+
 // checks whether Date is valid
 function validDate(d) {
   return d instanceof Date && !isNaN(d)
